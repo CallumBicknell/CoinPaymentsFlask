@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import g, redirect, url_for
+from flask import flash, g, redirect, url_for
 from flask_login import current_user
 
 
@@ -19,6 +19,7 @@ def admin_login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if not g.user.is_admin:
-            return "you need to be admin", 401
+            flash('You need to be admin to access that page', "error")
+            return redirect(url_for('main.profile'), 401)
         return f(*args, **kwargs)
 
