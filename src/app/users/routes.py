@@ -4,17 +4,10 @@ from flask_login import current_user, login_required, login_user, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.extensions import db
+from app.decorators import not_loggedin
 from app.models.user import User
 from app.users import bp
 
-
-def not_loggedin(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if current_user.is_authenticated:
-            return redirect(url_for('main.profile'))
-        return f(*args, **kwargs)
-    return decorated_function
 
 
 @bp.route('/login', methods=["GET", "POST"])
