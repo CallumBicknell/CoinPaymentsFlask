@@ -1,7 +1,7 @@
 from flask import Flask
 
 from config import Config
-from app.extensions import db, login_manager
+from app.extensions import db, login_manager, cache
 
 
 def create_app(config_class=Config):
@@ -12,6 +12,7 @@ def create_app(config_class=Config):
     # Initialize Flask extensions here
     db.init_app(app)
     login_manager.init_app(app)
+    cache.init_app(app)
 
     # Register blueprints here
     from app.main import bp as main_bp
