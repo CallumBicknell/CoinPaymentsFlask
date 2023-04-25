@@ -9,3 +9,7 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI')\
         or 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # Flask-Caching related configs
+    CACHE_TYPE = "SimpleCache" 
+    CACHE_DEFAULT_TIMEOUT = 300
